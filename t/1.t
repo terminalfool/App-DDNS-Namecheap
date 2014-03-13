@@ -7,10 +7,10 @@ use App::DDNS::Namecheap;
 
 my $domain = 'site.com';
 my $ip = '127.0.0.1';
-my $pw = 'abcdefghijklmnopqrstuvwxyz123456';
+my $password = 'abcdefghijklmnopqrstuvwxyz123456';
 my $hosts = [ '@', 'www' ];
 
-my $update = App::DDNS::Namecheap->new( domain => $domain, ip => $ip, pw => $pw, hosts => $hosts );
+my $update = App::DDNS::Namecheap->new( domain => $domain, ip => $ip, password => $password, hosts => $hosts );
 
 ok( defined $update );
 ok( $update->isa('App::DDNS::Namecheap'));
