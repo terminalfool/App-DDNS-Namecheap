@@ -12,11 +12,9 @@ has ip => ( is => 'rw', isa => 'Str', required => 0 );
 sub update {
     my $self = shift;
 
-    unless ($self->{ip}) {
-                $self->{ip} = get("http://checkip.dyndns.org/");
-       	        if ($self->{ip} =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/) {
-		    $self->{ip} = $1;
-		}
+    $self->{ip} = get("http://checkip.dyndns.org/");
+    if ($self->{ip} =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/) {
+	    $self->{ip} = $1;
     }
 
     foreach ( @{ $self->{hosts} } ) {

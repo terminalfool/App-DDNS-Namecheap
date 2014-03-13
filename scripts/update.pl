@@ -13,7 +13,6 @@ my $domain =  App::DDNS::Namecheap->new(
                   domain   => 'website.com',
 		  password => 'abcdefghijklmnopqrstuvwxyz012345',
 		  hosts    => [ "@", "www" ],
-#		  ip       => '127.0.0.1',        #defaults to external ip
 );
 
 while (1) {
