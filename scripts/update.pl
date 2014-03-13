@@ -5,7 +5,6 @@ use strict;
 use warnings;
 
 use App::DDNS::Namecheap;
-use Try::Tiny;
 
 my $timeout = 1;  # 1 hour timeout
 $timeout *= 3600;
