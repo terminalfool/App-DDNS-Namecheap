@@ -1,0 +1,9 @@
+###App-Namecheap-DDNS
+
+This is a utility for updating a dynamic domain administered by Namecheap.
+
+See [App::Namecheap::DDNS](http://search.cpan.org/~dwatson/App::Namecheap::DDNS/) on the CPAN for details.
+
+***
+
+This library is free software. You can redistribute it and/or modify it under the same terms as Perl itself.

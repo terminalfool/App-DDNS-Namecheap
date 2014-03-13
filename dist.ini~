@@ -1,0 +1,29 @@
+name             = App-Namecheap-DDNS
+version          = 0.01
+author           = David Watson <dwatson@cpan.org>
+license          = Perl_5
+copyright_holder = David Watson
+
+[GatherDir]
+[MetaJSON]
+[MetaYAML]
+[ReadmeFromPod]
+[MakeMaker]
+[Manifest]
+[PruneCruft]
+[PruneFiles]
+match = dist.ini
+match = README.md
+match = .*~$
+match = \.DS_Store$
+[License]
+[PkgVersion]
+[PodVersion]
+[NextRelease]
+format = %v %{EEE MMM d hh:mm:ss V yyyy}d
+[PodSyntaxTests]
+[PodCoverageTests]
+[AutoPrereqs]
+[@Git]
+[GitHub::Meta]
+[MinimumPerl]
