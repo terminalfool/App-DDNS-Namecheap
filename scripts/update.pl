@@ -7,8 +7,8 @@ use warnings;
 use App::DDNS::Namecheap;
 use Try::Tiny;
 
-my $timeout = 1;  # 1 day timeout
-$timeout *= 86400;
+my $timeout = 1;  # 1 hour timeout
+$timeout *= 3600;
 
 my $domain =  App::DDNS::Namecheap->new(
                   domain   => 'website.com',
@@ -18,22 +18,8 @@ my $domain =  App::DDNS::Namecheap->new(
 );
 
 while (1) {
-   try {
-         local $SIG{ALRM} = sub { die "alarm\n" };
-         alarm $timeout;
-         main();
-         alarm 0;
-       }
-
-   catch {
-         die $_ unless $_ eq "alarm\n";
- 	 kill HUP => $$;
-         print "ddns cycled.\n";
-       };
-}
-
-sub main {
-   $domain->update();
+    $domain->update();
+    sleep ($timeout);
 }
 
 =head1 NAME
