@@ -1,8 +1,8 @@
 ###App-DDNS-Namecheap
 
-This is a utility for updating a dynamic domain administered by Namecheap.
+Utility for updating a Namecheap registered domain.
 
-See [App::DDNS::Namecheap](http://search.cpan.org/~dwatson/App::DDNS::Namecheap/) on the CPAN for details.
+This has not yet been released to the CPAN.
 
 ***
 
