@@ -1,6 +1,6 @@
 ###App-DDNS-Namecheap
 
-Utility for updating a Namecheap registered domain.
+Address record update Utility for Namecheap registered domains.
 
 This has not yet been released to the CPAN.
 

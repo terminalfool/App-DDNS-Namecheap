@@ -46,7 +46,7 @@ update.pl - command line stub
 
 =head1 DESCRIPTION
 
-This script updates a Namecheap registered domain.
+Address record update utility for Namecheap registered domains.
 
 =head1 CAVEATS
 
