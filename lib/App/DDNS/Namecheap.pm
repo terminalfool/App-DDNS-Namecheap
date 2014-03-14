@@ -25,8 +25,9 @@ sub update {
     if ( $self->{ip} ) {
         foreach ( @{ $self->{hosts} } ) {
             my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
-	    my $return = get($url);
-	    carp "$return" unless $return =~ /<errcount>0<\/errcount>/is;
+	    if ( my $return = get($url) ) {
+	        carp "$return" unless $return =~ /<errcount>0<\/errcount>/is;
+	    }
         }
     }
 }
