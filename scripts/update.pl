@@ -6,7 +6,7 @@ use warnings;
 
 use App::DDNS::Namecheap;
 
-my $timeout = 1;  # 1 hour timeout
+my $timeout = 24;  # 24 hour timeout
 $timeout *= 3600;
 
 my $domain =  App::DDNS::Namecheap->new(

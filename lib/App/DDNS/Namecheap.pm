@@ -1,6 +1,7 @@
 package App::DDNS::Namecheap;
 use Moose;
 
+use Carp qw(carp);
 use LWP::Simple qw($ua get);
 use Mozilla::CA;
 
@@ -15,11 +16,14 @@ sub update {
     $self->{ip} = get("http://checkip.dyndns.org/");
     if ($self->{ip} =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/) {
 	    $self->{ip} = $1;
+    } else {
+            carp "failed to get external ip";
     }
 
     foreach ( @{ $self->{hosts} } ) {
         my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
-	get($url);
+	my $return = get($url);
+	carp "$return" unless $return =~ /success/is;
     }
 }
 
@@ -39,7 +43,6 @@ App::DDNS::Namecheap - Address record update utility for Namecheap registered do
                               domain   => 'website.com',
          		      password => 'abcdefghijklmnopqrstuvwxyz012345',
 			      hosts    => [ "@", "www" ],
-    #			      ip       => '127.0.0.1',        #defaults to host ip
     );
 
    $domain->update();
