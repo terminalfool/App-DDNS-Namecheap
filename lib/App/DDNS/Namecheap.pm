@@ -3,6 +3,7 @@ use Moose;
 
 use Carp qw(carp);
 use LWP::Simple qw($ua get);
+$ua->agent("");
 use Mozilla::CA;
 
 has domain => ( is => 'ro', isa => 'Str', required => 1 );
@@ -18,12 +19,15 @@ sub update {
 	    $self->{ip} = $1;
     } else {
             carp "failed to get external ip";
+	    undef $self->{ip};
     }
 
-    foreach ( @{ $self->{hosts} } ) {
-        my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
-	my $return = get($url);
-	carp "$return" unless $return =~ /success/is;
+    if ( $self->{ip} ) {
+        foreach ( @{ $self->{hosts} } ) {
+            my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
+	    my $return = get($url);
+	    carp "$return" unless $return =~ /<errcount>0<\/errcount>/is;
+        }
     }
 }
 
