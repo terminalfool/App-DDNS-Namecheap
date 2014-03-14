@@ -16,5 +16,5 @@ ok( defined $update );
 ok( $update->isa('App::DDNS::Namecheap'));
 ok( $update->{domain} eq $domain );
 ok( $update->{ip} eq $ip );
-ok( $update->{pw} eq $pw );
+ok( $update->{password} eq $password );
 ok( $update->{hosts} ~~ $hosts );
