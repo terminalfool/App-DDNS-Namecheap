@@ -40,7 +40,7 @@ __END__
 
 =head1 NAME
 
-App::DDNS::Namecheap - Dynamic DNS update for Namecheap registered domains.
+App::DDNS::Namecheap - Dynamic DNS update utilty for Namecheap registered domains
 
 =head1 SYNOPSIS
 

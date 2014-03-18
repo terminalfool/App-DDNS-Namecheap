@@ -10,7 +10,7 @@ my $timeout = 24;  # 24 hour timeout
 $timeout *= 3600;
 
 my $domain =  App::DDNS::Namecheap->new(
-                  domain   => 'website.com',
+                  domain   => 'mysite.org',
 		  password => 'abcdefghijklmnopqrstuvwxyz012345',
 		  hosts    => [ "@", "www" ],
 );
