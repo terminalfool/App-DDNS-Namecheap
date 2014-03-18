@@ -2,7 +2,7 @@
 
 Address record update utility for Namecheap registered domains.
 
-This has not yet been released to the CPAN.
+See [App::DDNS::Namecheap](http://search.cpan.org/~dwatson/App-DDNS-Namecheap/) on the CPAN for details.
 
 ***
 
