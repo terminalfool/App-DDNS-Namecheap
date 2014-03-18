@@ -40,17 +40,22 @@ __END__
 
 =head1 NAME
 
-App::DDNS::Namecheap - Address record update utility for Namecheap registered domains.
+App::DDNS::Namecheap - Dynamic DNS update for Namecheap registered domains.
 
 =head1 SYNOPSIS
 
     my $domain =  App::DDNS::Namecheap->new(
-                              domain   => 'website.com',
-         		      password => 'abcdefghijklmnopqrstuvwxyz012345',
-			      hosts    => [ "@", "www" ],
+                      domain   => 'mysite.org',
+         	      password => 'abcdefghijklmnopqrstuvwxyz012345',
+		      hosts    => [ "@", "www" ],
     );
 
-   $domain->update();
+    $domain->update();
+
+=head1 DESCRIPTION
+
+This module provides a method for setting the address records of your Namecheap registered 
+domains to your external IP address. 
 
 =head1 CAVEATS
 
