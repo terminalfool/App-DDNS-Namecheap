@@ -42,15 +42,11 @@ __END__
 
 =head1 NAME
 
-<<<<<<< HEAD
 App::DDNS::Namecheap - Dynamic DNS update utility for Namecheap registered domains
 
 =head1 VERSION
 
-version 0.011
-=======
-App::DDNS::Namecheap - Dynamic DNS update utilty for Namecheap registered domains
->>>>>>> 57960fa74721986c9a59905c42afcc7f8185fdfb
+version 0.01
 
 =head1 SYNOPSIS
 
@@ -58,10 +54,7 @@ App::DDNS::Namecheap - Dynamic DNS update utilty for Namecheap registered domain
                       domain   => 'mysite.org',
          	      password => 'abcdefghijklmnopqrstuvwxyz012345',
 		      hosts    => [ "@", "www" ],
-<<<<<<< HEAD
 		      ip       => '127.0.0.1',      #defaults to public ip
-=======
->>>>>>> 57960fa74721986c9a59905c42afcc7f8185fdfb
     );
 
     $domain->update();

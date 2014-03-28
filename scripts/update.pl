@@ -30,11 +30,7 @@ update.pl - command line stub
 
 =head1 DESCRIPTION
 
-<<<<<<< HEAD
-Address record update utility for Namecheap registered domains
-=======
-Dynamic DNS update daemon for Namecheap registered domains.
->>>>>>> 57960fa74721986c9a59905c42afcc7f8185fdfb
+Dynamic DNS update daemon for Namecheap registered domains
 
 =head1 CAVEATS
 
