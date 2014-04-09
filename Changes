@@ -1,4 +1,7 @@
 Revision history for Perl module App::DDNS::Namecheap
 
 {{$NEXT}}
+    - ip constraints, concise warnings
+
+0.01 Tue Mar 18 12:41:21 EDT 2014
     - initial release
