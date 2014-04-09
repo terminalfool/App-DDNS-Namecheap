@@ -9,29 +9,23 @@ use Mozilla::CA;
 has domain => ( is => 'ro', isa => 'Str', required => 1 );
 has password => ( is => 'ro', isa => 'Str', required => 1 );
 has hosts => ( is => 'ro', isa => 'ArrayRef', required => 1 );
-has ip => ( is => 'rw', isa => 'Str', builder => 'external_ip' );
+has ip => ( is => 'rw', isa => 'Str', builder => '_external_ip' );
 
 sub update {
   my $self = shift;
-
-  foreach ( @{ $self->{hosts} } ) {
-    my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
-    if ( my $return = get($url) ) {
-      carp "$return" unless $return =~ /<errcount>0<\/errcount>/is;
+  unless ( $self->{ip} == 0 ) {
+    foreach ( @{ $self->{hosts} } ) {
+      my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
+      if ( my $return = get($url) ) {
+        carp "$return" unless $return =~ /<errcount>0<\/errcount>/is;
+      }
     }
   }
 }
 
-sub external_ip {
-  my $self = shift;
-
-  my $ip = get("http://checkip.dyndns.org/");
-  if ( $ip =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/ ) {
-    $ip = $1;
-  } else {
-    carp "failed to get external ip";
-    undef $ip;
-  }
+sub _external_ip {
+  my $ip = get("http://checkip.dyndns.org/") || 0;
+  $ip = ( $ip =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/ ? $1 : 0 );
 }
 
 no Moose;
@@ -53,8 +47,8 @@ version 0.01
     my $domain =  App::DDNS::Namecheap->new(
                       domain   => 'mysite.org',
          	      password => 'abcdefghijklmnopqrstuvwxyz012345',
-		      hosts    => [ "@", "www" ],
-		      ip       => '127.0.0.1',      #defaults to public ip
+		      hosts    => [ "@", "www", "*" ],
+		      ip       => '127.0.0.1',      #defaults to external ip
     );
 
     $domain->update();
