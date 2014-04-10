@@ -10,23 +10,35 @@ my $timeout = 24;  # 24 hour timeout
 $timeout *= 3600;
 
 while (1) {
-  my $domain =  App::DDNS::Namecheap->new(
+
+  my $ip = App::DDNS::Namecheap->external_ip;
+
+  App::DDNS::Namecheap->new(
                   domain   => 'mysite.org',
 		  password => 'abcdefghijklmnopqrstuvwxyz012345',
 		  hosts    => [ "@", "www", "*" ],
-  );
+		  ip       => $ip,
+  )->update;
 
-  $domain->update();
+  App::DDNS::Namecheap->new(
+                  domain   => 'myothersite.org',
+		  password => 'abcdefghijklmnopqrstuvwxyz012345',
+		  hosts    => [ "@", "www", "*" ],
+		  ip       => $ip,
+  )->update;
+
+# ...
+
   sleep ($timeout);
 }
 
 =head1 NAME
 
-update.pl - command line stub
+update_numerous.pl - command line stub
 
 =head1 SYNOPSIS
 
-   perl update.pl
+   perl update_numerous.pl
 
 =head1 DESCRIPTION
 
