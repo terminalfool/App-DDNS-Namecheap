@@ -42,10 +42,6 @@ __END__
 
 App::DDNS::Namecheap - Dynamic DNS update utility for Namecheap registered domains
 
-=head1 VERSION
-
-version 0.01
-
 =head1 SYNOPSIS
 
     my $domain =  App::DDNS::Namecheap->new(
@@ -68,7 +64,7 @@ domains to your external IP address.
 
 =item B<update>
 
-Contacts the Namecheap DDNS service with the four attributes listed above.
+Updates Namecheap A records using the four attributes listed above.
 
 =item B<external_ip>
 
