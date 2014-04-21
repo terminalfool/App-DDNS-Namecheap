@@ -14,7 +14,10 @@ sub update {
   foreach ( @{ $self->{hosts} } ) {
     my $url = "https://dynamicdns.park-your-domain.com/update?domain=$self->{domain}&password=$self->{password}&host=$_";
     if ( my $return = get($url) ) {
-      print "$0: $return\n" unless $return =~ /<errcount>0<\/errcount>/is;
+      unless ( $return =~ /<errcount>0<\/errcount>/is ) {
+	$return = ( $return =~ /<responsestring>(.*)<\/responsestring>/is ? $1 : "unknown error" );
+        print "failure submitting host \"$_\.$self->{domain}\": $return\n";
+      }
     }
   }
 }
