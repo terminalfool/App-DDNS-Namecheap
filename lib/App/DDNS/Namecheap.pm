@@ -8,29 +8,16 @@ use Mozilla::CA;
 has domain => ( is => 'ro', isa => 'Str', required => 1 );
 has password => ( is => 'ro', isa => 'Str', required => 1 );
 has hosts => ( is => 'ro', isa => 'ArrayRef', required => 1 );
-has ip => ( is => 'rw', isa => 'Str', builder => 'external_ip' );
 
 sub update {
   my $self = shift;
-  unless ( $self->{ip} eq 0 ) {
-    foreach ( @{ $self->{hosts} } ) {
-      my $url = "https://dynamicdns.park-your-domain.com/update?host=$_&domain=$self->{domain}&password=$self->{password}&ip=$self->{ip}";
-      if ( my $return = get($url) ) {
-        $self->log("$0: $return") unless $return =~ /<errcount>0<\/errcount>/is;
-      }
+  foreach ( @{ $self->{hosts} } ) {
+    my $url = "https://dynamicdns.park-your-domain.com/update?domain=$self->{domain}&password=$self->{password}&host=$_";
+    if ( my $return = get($url) ) {
+      print "$0: $return\n" unless $return =~ /<errcount>0<\/errcount>/is;
     }
   }
 }
-
-sub external_ip {
-  my $self = shift;
-  my $ip = get("http://icanhazip.com") || 0;
-  $ip = ( $ip =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/ ? $1 : 0 );
-  $self->log("$0: failed to get external ip") if $ip eq 0;
-  return $ip;
-}
-
-sub log { shift; print @_, "\n" }
 
 no Moose;
 
@@ -48,7 +35,6 @@ App::DDNS::Namecheap - Dynamic DNS update utility for Namecheap registered domai
                       domain   => 'mysite.org',
          	      password => 'abcdefghijklmnopqrstuvwxyz012345',
 		      hosts    => [ "@", "www", "*" ],
-		      ip       => '127.0.0.1',      #defaults to external ip
     );
 
     $domain->update();
@@ -64,21 +50,9 @@ domains to your external IP address.
 
 =item B<update>
 
-Updates Namecheap A records using the four attributes listed above.
-
-=item B<external_ip>
-
-Pulls external ip using a public service.
-
-=item B<log>
-
-Logs output to stderr.
+Updates Namecheap A records using the three attributes listed above.
 
 =back
-
-=head1 CAVEATS
-
-Tested under darwin only.
 
 =head1 AUTHOR
 

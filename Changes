@@ -1,6 +1,9 @@
 Revision history for Perl module App::DDNS::Namecheap
 
 {{$NEXT}}
+    - remove unnecessary methods
+
+0.012 Thu Apr 10 06:05:22 EDT 2014
     - multi update script, fix blunder
 
 0.011 Wed Apr 9 09:38:36 EDT 2014

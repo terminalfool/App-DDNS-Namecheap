@@ -9,13 +9,13 @@ use App::DDNS::Namecheap;
 my $timeout = 24;  # 24 hour timeout
 $timeout *= 3600;
 
-while (1) {
-  my $domain =  App::DDNS::Namecheap->new(
-                  domain   => 'mysite.org',
-		  password => 'abcdefghijklmnopqrstuvwxyz012345',
-		  hosts    => [ "@", "www", "*" ],
-  );
+my $domain =  App::DDNS::Namecheap->new(
+                domain   => 'mysite.org',
+          	password => 'abcdefghijklmnopqrstuvwxyz012345',
+		hosts    => [ "@", "www", "*" ],
+);
 
+while (1) {
   $domain->update();
   sleep ($timeout);
 }
@@ -31,10 +31,6 @@ update.pl - command line stub
 =head1 DESCRIPTION
 
 Dynamic DNS update stub for Namecheap registered domains
-
-=head1 CAVEATS
-
-Tested on darwin only.
 
 =head1 AUTHOR
 
