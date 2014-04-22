@@ -1,16 +1,24 @@
 package App::DDNS::Namecheap;
 
-use Moose;
+use strict;
+use Exporter;
 use LWP::Simple qw($ua get);
 $ua->agent("");
 use Mozilla::CA;
 
-has domain => ( is => 'ro', isa => 'Str', required => 1 );
-has password => ( is => 'ro', isa => 'Str', required => 1 );
-has hosts => ( is => 'ro', isa => 'ArrayRef', required => 1 );
+sub new {
+
+  my ( $class, %self ) = @_;
+  my $self = { %self };
+  bless $self, $class;
+
+}
 
 sub update {
   my $self = shift;
+
+  foreach ( "domain", "password", "hosts" ) { die "App::DDNS::Namecheap: $_ undefined" unless $self->{ $_ } }
+
   foreach ( @{ $self->{hosts} } ) {
     my $url = "https://dynamicdns.park-your-domain.com/update?domain=$self->{domain}&password=$self->{password}&host=$_";
     if ( my $return = get($url) ) {
@@ -21,8 +29,6 @@ sub update {
     }
   }
 }
-
-no Moose;
 
 1;
 
