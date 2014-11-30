@@ -32,7 +32,7 @@ update.pl - command line stub
 
 =head1 DESCRIPTION
 
-Dynamic DNS update stub for Namecheap registered domains
+Dynamic DNS update stub for Namecheap hosted domains
 
 =head1 AUTHOR
 

@@ -48,8 +48,8 @@ App::DDNS::Namecheap - Dynamic DNS update utility for Namecheap registered domai
 
 =head1 DESCRIPTION
 
-This module provides a method for setting the address records of your Namecheap registered 
-domains to your external IP address. 
+This module provides a method for setting the address records of your Namecheap hosted 
+domains. 
 
 =head1 METHODS
 
@@ -58,7 +58,7 @@ domains to your external IP address.
 =item B<update>
 
 Updates Namecheap A records using the attributes listed above. The optional ip attribute 
-can be set statically; otherwise the ip from which the script is running will be used.
+can be set statically; otherwise the ip where the script is running will be used.
 
 =back
 
