@@ -1,6 +1,9 @@
 Revision history for Perl module App::DDNS::Namecheap
 
 {{$NEXT}}
+    - add optional ip attribute
+
+0.013 Tue Apr 22 05:24:30 EDT 2014
     - remove unnecessary methods
 
 0.012 Thu Apr 10 06:05:22 EDT 2014

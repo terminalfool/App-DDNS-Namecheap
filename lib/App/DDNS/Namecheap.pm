@@ -8,15 +8,18 @@ use Mozilla::CA;
 has domain => ( is => 'ro', isa => 'Str', required => 1 );
 has password => ( is => 'ro', isa => 'Str', required => 1 );
 has hosts => ( is => 'ro', isa => 'ArrayRef', required => 1 );
+has ip => ( is => 'ro', isa => 'Str', required => 0 );
 
 sub update {
   my $self = shift;
   foreach ( @{ $self->{hosts} } ) {
     my $url = "https://dynamicdns.park-your-domain.com/update?domain=$self->{domain}&password=$self->{password}&host=$_";
+    $url .= "&ip=$self->{ip}" if $self->{ip};
     if ( my $return = get($url) ) {
       unless ( $return =~ /<errcount>0<\/errcount>/is ) {
 	$return = ( $return =~ /<responsestring>(.*)<\/responsestring>/is ? $1 : "unknown error" );
         print "failure submitting host \"$_\.$self->{domain}\": $return\n";
+	return;
       }
     }
   }
@@ -38,6 +41,7 @@ App::DDNS::Namecheap - Dynamic DNS update utility for Namecheap registered domai
                       domain   => 'mysite.org',
          	      password => 'abcdefghijklmnopqrstuvwxyz012345',
 		      hosts    => [ "@", "www", "*" ],
+                      ip       => '127.0.0.1',    #optional -- defaults to external ip
     );
 
     $domain->update();
@@ -53,7 +57,8 @@ domains to your external IP address.
 
 =item B<update>
 
-Updates Namecheap A records using the three attributes listed above.
+Updates Namecheap A records using the attributes listed above. The optional ip attribute 
+can be set statically; otherwise the ip from which the script is running will be used.
 
 =back
 

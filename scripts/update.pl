@@ -20,6 +20,8 @@ while (1) {
   sleep ($timeout);
 }
 
+1;
+
 =head1 NAME
 
 update.pl - command line stub
