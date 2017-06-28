@@ -1,4 +1,4 @@
-###App-DDNS-Namecheap
+### App-DDNS-Namecheap
 
 Address record update utility for Namecheap hosted domains.
 
